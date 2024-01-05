@@ -10,7 +10,7 @@ When using GoogleTest, you start by writing assertions, which are statements tha
 <mark>ASSERT_*</mark> is used when you want to generate a fatal failure to a verification, and abort the execution. <mark>EXPECT_*</mark> is used to generate nonfatal failures and continue the execution after verification - it just reports the failure in the test.
 
 To provide custom messages, just stream it to the macro:
-```
+```cpp
 ASSERT_EQ(x.size(), y.size()) << "Vectors x and y are of unequal length";
 ```
 
@@ -21,7 +21,7 @@ ASSERT_EQ(x.size(), y.size()) << "Vectors x and y are of unequal length";
 Use the <mark>TEST()</mark> macro to define and name a test function. TEST() arguments go from general to specific. The first argument is the name of the test suite, and the second argument is the test’s name within the test suite. Both names must be valid C++ identifiers, and they should not contain any underscores (_).
 
 GoogleTest groups the test results by test suites, so logically related tests should be in the same test suite; in other words, the first argument to their TEST() should be the same. Example:
-```
+```cpp
 int Factorial(int n);  // Returns the factorial of n
 
 // Tests factorial of 0.
@@ -53,7 +53,7 @@ If you find yourself writing two or more tests that operate on similar data, you
 
 When using a fixture, use <mark>TEST_F()</mark> instead of <mark>TEST()</mark> as it allows you to access objects and subroutines in the test fixture:
 
-```
+```cpp
 #include "TestFixtureClass.h"
 TEST_F(TestFixtureClassName, TestName) {
   ... test body ...
@@ -63,7 +63,7 @@ TEST_F(TestFixtureClassName, TestName) {
 For each test defined with TEST_F(), GoogleTest will create a fresh test fixture at runtime, immediately initialize it via SetUp(), run the test, clean up by calling TearDown(), and then delete the test fixture.
 
 There is a good example of a FIFO Queue in documentation:
-```
+```cpp
 template <typename E>  // E is the element type.
 class Queue {
  public:
@@ -123,7 +123,7 @@ Of course, we should separate it into several classes to hold a specific functio
 
 After defining your tests, you can run them with <mark>RUN_ALL_TESTS()</mark>, which returns 0 if all the tests are successful, or 1 otherwise. Note that RUN_ALL_TESTS() runs all tests in your link unit–they can be from different test suites, or even different source files.
 
-```
+```cpp
 int = RUN_ALL_TESTS();
 ```
 
